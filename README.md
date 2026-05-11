@@ -34,3 +34,5 @@ Repositorio colaborativo para la práctica de "Multiagentes" de la asignatura "S
 - Garrote Martín, Víctor
 - Juaranz Domínguez, André
 - Lahoz Vives, Hugo
+
+(Universidad Politécnica de Madrid - Escuela Técnica Superior de Ingenieros Informáticos - 25/26)
