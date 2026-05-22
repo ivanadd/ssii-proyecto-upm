@@ -1,3 +1,16 @@
+#################################################
+# Parte de este .gitignore ha sido obtenido mediante el repositorio
+# oficial de GitHub que gestiona y crea .gitignore para diferentes contextos
+# y software. Hemos hecho uso del .gitignore genérico para Eclipse, además
+# del autogenerado para Java por GitHub. Adicionalmente, hemos incluido
+# ficheros manualmente que queremos ignorar en los commits, así como la
+# eliminación de alguno ignorado previamente que nos interesaba.
+#################################################
+
+# Añadidos manualmente
+.APDDescription.txt
+.MTPs-Main-Container.txt
+
 # Compiled class file
 *.class
 
