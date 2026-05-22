@@ -13,5 +13,6 @@
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="proyecto_ssii/lib/dll"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="lib/tess4j-5.18.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
