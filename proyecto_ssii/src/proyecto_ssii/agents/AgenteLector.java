@@ -6,12 +6,10 @@ import jade.lang.acl.*;
 
 @SuppressWarnings({ "unused", "serial" })
 public class AgenteLector extends Agent {
-	protected CyclicBehaviour cyclicBehaviour; 
+	protected TickerBehaviour tickerBehaviour; 
 	protected void setup() {
-		cyclicBehaviour = new CyclicBehaviour(this) {
+		tickerBehaviour = new TickerBehaviour(this, ) {
 			
-			@Override
-			public void action() {
 				// TODO Auto-generated method stub
 				// 1. Leer frame webcam
 				
@@ -28,8 +26,13 @@ public class AgenteLector extends Agent {
 				// 5. Mostrar img
 				
 				
+
+			@Override
+			protected void onTick() {
+				// TODO Auto-generated method stub
+				
 			}
 		};
-		addBehaviour(cyclicBehaviour);
+		addBehaviour(tickerBehaviour);
 	}
 }
