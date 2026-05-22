@@ -8,7 +8,9 @@ Repositorio colaborativo para la práctica de "Multiagentes" de la asignatura "S
 
 ## Dependencias necesarias para la instalación
 
-= A COMPLETAR =
+Para el agente de percepción, se ha hecho uso de las siguientes librerías y ficheros adicionales:
+- 'opencv-4120.jar': Encargado de la apertura de la cámara y gestión de la misma. Puede descargarse desde su [página web](https://opencv.org/releases/) oficial.
+- 'tess4j-5.18.0.jar': Encargado de la realización del OCR. Puede descargarse la última versión desde su [repositorio](https://github.com/nguyenq/tess4j/) de GitHub, en [_releases_](https://github.com/nguyenq/tess4j/releases).
 
 ## Instrucciones de ejecución
 
