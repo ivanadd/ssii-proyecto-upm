@@ -1,5 +1,6 @@
 package proyecto_ssii.models;
 
+@SuppressWarnings("unused")
 public class Usuario {
 	private String nombre;
 	private String matricula;
