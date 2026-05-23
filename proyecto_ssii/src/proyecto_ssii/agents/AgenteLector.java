@@ -107,31 +107,6 @@ public class AgenteLector extends Agent {
 					    }
 					}
 					
-//					for(MatOfPoint contorno : contornos) {
-//						rectangulo = Imgproc.boundingRect(contorno);
-//						anchura = rectangulo.width;
-//						altura = rectangulo.height;
-//						if(altura == 0) continue;
-//						aspectRatio = (double)(anchura/altura);
-//						
-//						if(aspectRatio > 2.5 && aspectRatio < 6.5) {
-//							if(anchura > 120 && altura > 50) {
-//	
-//								// pinta rectangulo porque ha encontrado matricula
-//								Point p1 = new Point(rectangulo.x, rectangulo.y);
-//								Point p2 = new Point(rectangulo.x + rectangulo.width,
-//										rectangulo.y + rectangulo.height);
-//								Scalar scalar = new Scalar(0,255,0); // rectangulo verde
-//								Imgproc.rectangle(frame,p1,p2,scalar);
-//								
-//								// texto sobre rectangulo
-//								Imgproc.putText(frame,"Matricula",new Point(rectangulo.x, rectangulo.y-10),
-//										Imgproc.FONT_HERSHEY_SIMPLEX,0.7, new Scalar(0,255,0),2);
-//							}
-//						}
-//						
-//					}
-					
 					// mostrar camara
 
 					if(bestMatr != null) {
