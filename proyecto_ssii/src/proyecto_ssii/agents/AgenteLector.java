@@ -164,4 +164,22 @@ public class AgenteLector extends Agent {
 		HighGui.destroyAllWindows();
 		System.out.println("[DEBUG LECTOR] Agente lector finalizado.");
 	}
+	
+	/**
+	 * Metodo que convierte Mat en BufferedImage
+	 * @param mat
+	 * @return BufferedImage
+	 */
+	private BufferedImage matToBufferedImage(Mat mat) {
+		BufferedImage res = null;
+		MatOfByte mob = new MatOfByte();
+		Imgcodecs.imencode(".jpg", mat, mob);
+		byte[] byteArray = mob.toArray();
+		try {
+			res = javax.imageio.ImageIO.read(new java.io.ByteArrayInputStream(byteArray));
+		} catch(Exception e) {e.printStackTrace();}
+		
+		return res;
+	}
+	
 }
