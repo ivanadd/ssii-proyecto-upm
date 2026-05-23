@@ -71,7 +71,7 @@ public class AgenteInterfaz extends Agent {
         framePlaza.setLayout(new GridLayout(2, 1, 0, 8));
  
         lblMensajePlaza = crearLabel("Esperando vehículo...", 18, Color.CYAN);
-        lblTiempo       = crearLabel("",                      22, Color.WHITE);
+        lblTiempo = crearLabel("", 22, Color.WHITE);
  
         framePlaza.add(lblMensajePlaza);
         framePlaza.add(lblTiempo);
@@ -120,6 +120,18 @@ public class AgenteInterfaz extends Agent {
                 lblTiempo.setText(String.format("Tiempo restante: %02d:%02d", min, seg));
             }
         });
+    }
+    
+    //Resetea la barrera al estado inicial tras TIEMPO_RESET_BARRERA segundos
+    @SuppressWarnings("unused")
+	private void resetearBarreraTrasEspera() {
+        new Thread(() -> {
+            try {
+                Thread.sleep(TIEMPO_RESET_BARRERA * 1000L);
+            } catch (InterruptedException ignored) {}
+            actualizarBarrera("Leyendo matrícula...", "", "", Color.WHITE);
+            System.out.println("[DEBUG INTERFAZ] Barrera reseteada.");
+        }).start();
     }
     
     
