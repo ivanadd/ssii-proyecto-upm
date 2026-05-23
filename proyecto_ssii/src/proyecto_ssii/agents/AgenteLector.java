@@ -81,8 +81,9 @@ public class AgenteLector extends Agent {
 						if(altura == 0) continue;
 						aspectRatio = (double)(anchura/altura);
 						
-						if(aspectRatio > 2 && aspectRatio < 6) {
-							if(anchura > 120 && altura > 30) {
+						if(aspectRatio > 2.5 && aspectRatio < 6.5) {
+							if(anchura > 120 && altura > 50) {
+	
 								// pinta rectangulo porque ha encontrado matricula
 								Point p1 = new Point(rectangulo.x, rectangulo.y);
 								Point p2 = new Point(rectangulo.x + rectangulo.width,
