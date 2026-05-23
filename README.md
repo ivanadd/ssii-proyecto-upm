@@ -1,6 +1,6 @@
 # Proyecto de Sistemas Inteligentes (2025-2026)
 ---
-Repositorio colaborativo para la práctica de "Multiagentes" de la asignatura "Sistemas Inteligentes", perteneciente al Plan 09 del Grado en Ingeniería Informática por la ETSIINF-UPM.
+Repositorio colaborativo para la práctica de "Multiagentes" de la asignatura "Sistemas Inteligentes", perteneciente al Plan 09 del Grado en Ingeniería Informática por la ETSIINF-UPM. Para acceder al directorio compartido de OneDrive para la realización de la presentación, pulse [aquí](https://upm365-my.sharepoint.com/:f:/r/personal/ivan_arias_alumnos_upm_es/Documents/PROYECTO%20SISTEMAS%20INTELIGENTES?csf=1&web=1&e=Flc34U) (previa invitación).
 
 ## Resumen y objetivos
 Este sistema se encarga de automatizar, mediante un sistema multiagente, las compras realizadas mediante _Click and Collect_ y derivados.
@@ -37,7 +37,7 @@ Para el agente de percepción, se ha hecho uso de las siguientes librerías y fi
 Agente de percepción:
 - `[22/05]`: Usado el LLM "GitHub Copilot" haciendo uso del modo "Auto", el cual ha seleccionado el modelo "GPT-5.4 mini". Se ha usado este LLM para corregir un error que obtenía por consola. Al arrancar JADE desde el agente de entrada (percepción), obtenía un error por pantalla, que indicaba que el agente había muerto sin haber sido terminado correctamente: 
 
-```shell
+```text
 ***  Uncaught Exception for agent AgenteLector  ***
 java.lang.UnsatisfiedLinkError: 'long org.opencv.videoio.VideoCapture.VideoCapture_5(int)'
 	at org.opencv.videoio.VideoCapture.VideoCapture_5(Native Method)
@@ -51,6 +51,12 @@ State was 2
 [DEBUG LECTOR] Agente lector finalizado.
 ```
 Este LLM ha sido el encargado de añadir un _try-catch_ que maneja la excepción que provocaba la muerte del agente.
+
+- `[23/05]`: Usado el LLM "ChatGPT" haciendo uso del modelo GPT-5.5. Este uso se justifica debido a que la primera implementación de la detección de contornos para la matrícula era incorrecta. 
+
+= COMPLETAR = COMPLETAR = COMPLETAR =
+
+- `[23/05]`: Usado el LLM "Gemini" para hacer una prueba del agente de procesamiento. Codigo que no es usado para la implementación final del agente. 
 
 ---
 ### Miembros del grupo

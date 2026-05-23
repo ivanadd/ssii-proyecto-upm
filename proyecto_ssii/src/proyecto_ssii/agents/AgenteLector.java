@@ -1,11 +1,12 @@
 package proyecto_ssii.agents;
 
-import java.util.ArrayList;
+import java.util.ArrayList;	
 import java.util.List;
 
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
+import org.opencv.core.MatOfPoint2f;
 import org.opencv.core.Point;
 import org.opencv.core.Rect;
 import org.opencv.core.Scalar;
@@ -74,33 +75,85 @@ public class AgenteLector extends Agent {
 					);
 					
 					Rect rectangulo; int anchura, altura; double aspectRatio;
+					Rect bestMatr = null; double bestArea = 0.0; double area;
+					
 					for(MatOfPoint contorno : contornos) {
-						rectangulo = Imgproc.boundingRect(contorno);
-						anchura = rectangulo.width;
-						altura = rectangulo.height;
-						if(altura == 0) continue;
-						aspectRatio = (double)(anchura/altura);
-						
-						if(aspectRatio > 2.5 && aspectRatio < 6.5) {
-							if(anchura > 120 && altura > 50) {
-	
-								// pinta rectangulo porque ha encontrado matricula
-								Point p1 = new Point(rectangulo.x, rectangulo.y);
-								Point p2 = new Point(rectangulo.x + rectangulo.width,
-										rectangulo.y + rectangulo.height);
-								Scalar scalar = new Scalar(0,255,0); // rectangulo verde
-								Imgproc.rectangle(frame,p1,p2,scalar);
-								
-								// texto sobre rectangulo
-								Imgproc.putText(frame,"Matricula",new Point(rectangulo.x, rectangulo.y-10),
-										Imgproc.FONT_HERSHEY_SIMPLEX,0.7, new Scalar(0,255,0),2);
-							}
-						}
-						
+					    MatOfPoint2f contorno2f = new MatOfPoint2f(contorno.toArray());
+					    double perimetro = Imgproc.arcLength(contorno2f, true);
+					    MatOfPoint2f aprox = new MatOfPoint2f();
+					    Imgproc.approxPolyDP(
+					            contorno2f,
+					            aprox,
+					            0.02 * perimetro,
+					            true
+					    );
+
+					    // Solo rectángulos
+					    if(aprox.total() == 4) {
+					        Rect rect = Imgproc.boundingRect(contorno);
+					        anchura = rect.width;
+					        altura = rect.height;
+					        if(altura == 0) continue;
+					        aspectRatio = (double) anchura / altura;
+					        area = anchura * altura;
+
+					        // Filtro tipo matrícula
+					        if(aspectRatio > 2.5 && aspectRatio < 6.5 && anchura > 120 && altura > 30 && area > 5000) {
+					            if(area > bestArea) {	// Nos quedamos con el más grande
+					                bestArea = area;
+					                bestMatr = rect;
+					            }
+					        }
+					    }
 					}
+					
+//					for(MatOfPoint contorno : contornos) {
+//						rectangulo = Imgproc.boundingRect(contorno);
+//						anchura = rectangulo.width;
+//						altura = rectangulo.height;
+//						if(altura == 0) continue;
+//						aspectRatio = (double)(anchura/altura);
+//						
+//						if(aspectRatio > 2.5 && aspectRatio < 6.5) {
+//							if(anchura > 120 && altura > 50) {
+//	
+//								// pinta rectangulo porque ha encontrado matricula
+//								Point p1 = new Point(rectangulo.x, rectangulo.y);
+//								Point p2 = new Point(rectangulo.x + rectangulo.width,
+//										rectangulo.y + rectangulo.height);
+//								Scalar scalar = new Scalar(0,255,0); // rectangulo verde
+//								Imgproc.rectangle(frame,p1,p2,scalar);
+//								
+//								// texto sobre rectangulo
+//								Imgproc.putText(frame,"Matricula",new Point(rectangulo.x, rectangulo.y-10),
+//										Imgproc.FONT_HERSHEY_SIMPLEX,0.7, new Scalar(0,255,0),2);
+//							}
+//						}
+//						
+//					}
 					
 					// mostrar camara
 					HighGui.imshow("[AGENTE LECTOR] Cámara en directo", frame);
+					if(bestMatr != null) {
+					    Imgproc.rectangle(
+					            frame,
+					            new Point(bestMatr.x, bestMatr.y),
+					            new Point(bestMatr.x + bestMatr.width,
+					            		bestMatr.y + bestMatr.height),
+					            new Scalar(0,255,0),
+					            3
+					    );
+
+					    Imgproc.putText(
+					            frame,
+					            "Matricula",
+					            new Point(bestMatr.x, bestMatr.y - 10),
+					            Imgproc.FONT_HERSHEY_SIMPLEX,
+					            0.9,
+					            new Scalar(0,255,0),
+					            2
+					    );
+					}
 					HighGui.waitKey(1);
 				}
 			}
