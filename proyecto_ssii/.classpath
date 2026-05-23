@@ -14,5 +14,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry exported="true" kind="lib" path="lib/tess4j-5.18.0.jar"/>
+	<classpathentry kind="lib" path="lib/jna-5.18.1.jar"/>
+	<classpathentry kind="lib" path="lib/lept4j-1.23.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
