@@ -50,11 +50,9 @@ public class AgenteInterfaz extends Agent {
             public void action() {
                 MessageTemplate mt = MessageTemplate.MatchPerformative(ACLMessage.INFORM);
                 ACLMessage msg = receive(mt);
-
                 if (msg != null) {
                     String contenido = msg.getContent();
                     System.out.println("[DEBUG INTERFAZ] Mensaje recibido → " + contenido);
-
                     String[] partes = contenido.split(";");
                     if (partes.length < 3) {
                         System.out.println("[WARN INTERFAZ] Formato de mensaje incorrecto: " + contenido);
@@ -62,6 +60,7 @@ public class AgenteInterfaz extends Agent {
                         String accion = partes[0].trim();
                         int plaza  = Integer.parseInt(partes[1].trim());
                         int tiempo = Integer.parseInt(partes[2].trim());
+                        procesarMensaje(accion, plaza, tiempo);
                     }
                 } else {
                     block();
@@ -69,6 +68,27 @@ public class AgenteInterfaz extends Agent {
             }
         });
         
+    }
+    
+    private void procesarMensaje(String accion, int plaza, int tiempo) {
+        switch (accion) {
+            case ACCESO_PERMITIDO:
+                //mostrar acceso permitido con matrícula
+                actualizarBarrera("Acceso permitido — Abriendo barrera", "", "", new Color(0, 150, 80));
+                //tras 2 segundos mostrar la plaza asignada
+                new Thread(() -> {
+                    try { Thread.sleep(2000); } catch (InterruptedException ignored) {}
+                    actualizarBarrera("Acceso permitido","", "Diríjase a la plaza " + plaza, new Color(0, 150, 80));
+                    System.out.println("[DEBUG INTERFAZ] Plaza asignada: " + plaza);
+                    //tras TIEMPO_RESET_BARRERA segundos resetear
+                    resetearBarreraTrasEspera();
+                }).start();
+                System.out.println("[DEBUG INTERFAZ] ACCESO_PERMITIDO → plaza " + plaza);
+                break;
+            default:
+                System.out.println("[WARN INTERFAZ] Acción no procesada aún: " + accion);
+                break;
+        }
     }
     
     @SuppressWarnings("unused")
