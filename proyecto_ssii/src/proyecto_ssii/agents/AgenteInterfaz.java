@@ -33,7 +33,7 @@ public class AgenteInterfaz extends Agent {
     @Override
     protected void setup() {
         System.out.println("[DEBUG INTERFAZ] AgenteInterfaz iniciado.");
-        SwingUtilities.invokeLater(this::construirVentanaBarrera);
+        SwingUtilities.invokeLater(this::construirVentanas);
         addBehaviour(new OneShotBehaviour(this) {
             @Override
             public void action() {
