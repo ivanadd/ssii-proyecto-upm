@@ -2,6 +2,7 @@ package proyecto_ssii.agents;
 
 import java.util.ArrayList;	
 import java.util.List;
+import java.awt.image.BufferedImage;
 
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
@@ -14,6 +15,10 @@ import org.opencv.core.Size;
 import org.opencv.highgui.HighGui;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.videoio.VideoCapture;
+import org.opencv.imgcodecs.Imgcodecs;
+
+import net.sourceforge.tess4j.Tesseract;
+import net.sourceforge.tess4j.TesseractException;
 
 import jade.core.Agent;
 import jade.core.behaviours.*;
@@ -23,6 +28,10 @@ import jade.lang.acl.*;
 public class AgenteLector extends Agent {
 	protected TickerBehaviour tickerBehaviour; 
 	private VideoCapture camara;
+	private Tesseract tesseract;
+	
+	private static final String PATH_TESSERACT = "C:\\Program Files\\Tesseract-OCR\\tessdata";
+	private static final String LANG = "eng";
 	
 	@Override
 	protected void setup() {
@@ -37,12 +46,18 @@ public class AgenteLector extends Agent {
 		}
 
 		// inicialización camara
-		camara = new VideoCapture(0);
+		camara = new VideoCapture(0);	
 		if(!camara.isOpened()) {
 			System.out.println("[ERROR LECTOR] Cámara no inicializada correctamente.");
 			doDelete();
 			return;
 		}
+		
+		// inicializacion
+		this.tesseract = new Tesseract();
+		this.tesseract.setDatapath(PATH_TESSERACT);
+		this.tesseract.setLanguage(LANG); // se usa eng porque matriculas son alfanumericas
+		this.tesseract.setVariable("tessedit_char_whitelist","0123456789BCDFGHJKLMNPRSTVWXYZ");
 		
 		tickerBehaviour = new TickerBehaviour(this, 100) {
 				// 1. Leer frame webcam
@@ -90,9 +105,9 @@ public class AgenteLector extends Agent {
 
 					    // Solo rectángulos
 					    if(aprox.total() == 4) {
-					        Rect rect = Imgproc.boundingRect(contorno);
-					        anchura = rect.width;
-					        altura = rect.height;
+					        rectangulo = Imgproc.boundingRect(contorno);
+					        anchura = rectangulo.width;
+					        altura = rectangulo.height;
 					        if(altura == 0) continue;
 					        aspectRatio = (double) anchura / altura;
 					        area = anchura * altura;
@@ -101,7 +116,7 @@ public class AgenteLector extends Agent {
 					        if(aspectRatio > 2.5 && aspectRatio < 6.5 && anchura > 120 && altura > 30 && area > 5000) {
 					            if(area > bestArea) {	// Nos quedamos con el más grande
 					                bestArea = area;
-					                bestMatr = rect;
+					                bestMatr = rectangulo;
 					            }
 					        }
 					    }
