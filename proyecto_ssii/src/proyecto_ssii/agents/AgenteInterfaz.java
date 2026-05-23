@@ -10,14 +10,21 @@ public class AgenteInterfaz extends Agent {
     public static final String ACCESO_DENEGADO   = "ACCESO_DENEGADO";
     public static final String PEDIDO_EN_PROCESO = "PEDIDO_EN_PROCESO";
 
-    //Tiempo en segundos que tarda un pedido en ser entregado
+    // Tiempo en segundos que tarda un pedido en ser entregado
     public static final int TIEMPO_ENTREGA = 30;
     
     // Segundos que se muestra el resultado en la barrera antes de resetear
     public static final int TIEMPO_RESET_BARRERA = 5;
      
+    @Override
+    protected void setup() {
+        System.out.println("[DEBUG INTERFAZ] AgenteInterfaz iniciado.");
+    }
     
-    
+    @Override
+    protected void takeDown() {
+        System.out.println("[DEBUG INTERFAZ] AgenteInterfaz finalizado.");
+    }
     
     
     
