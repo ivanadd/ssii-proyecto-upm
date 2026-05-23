@@ -78,6 +78,7 @@ public class AgenteLogica extends Agent {
         fsm.registerState(new WakerBehaviour(this, 30000) {
             protected void onWake() {
                 System.out.println("Pedido cargado en el coche de " + matriculaActual);
+                enviarMensajeUI(AgenteInterfaz.PEDIDO_EN_PROCESO, plazaAsignadaActual, 30);
             }
         }, ESTADO_ENTREGA);
         
@@ -145,7 +146,7 @@ public class AgenteLogica extends Agent {
                 result = 1;
             } else {
                 System.out.println("Hubo error al comprobar la matrícula"); 
-                enviarMensajeUI("ACCESO DENEGADO", -1, 0);
+                enviarMensajeUI(AgenteInterfaz.ACCESO_DENEGADO, 0, 0);
                 result = 0;
             }
         }
@@ -168,10 +169,10 @@ public class AgenteLogica extends Agent {
 
             if (plazaAsignadaActual != -1) {
                 System.out.println("Plaza " + plazaAsignadaActual + " asignada.");
-                enviarMensajeUI("PLAZA ASIGNADA" , plazaAsignadaActual, 30);
+                enviarMensajeUI(AgenteInterfaz.ACCESO_PERMITIDO , plazaAsignadaActual, 30);
             } else {
                 System.out.println("Parking lleno.");
-                enviarMensajeUI("PARKING LLENO", -1, 0);
+                enviarMensajeUI(AgenteInterfaz.ACCESO_DENEGADO, 0, 0);
             }
         }
     }
