@@ -2,6 +2,7 @@ package proyecto_ssii.agents;
 
 //Imports
 import jade.core.Agent;
+import jade.core.behaviours.OneShotBehaviour;
 import javax.swing.*;
 import java.awt.*;
 
@@ -30,6 +31,16 @@ public class AgenteInterfaz extends Agent {
     protected void setup() {
         System.out.println("[DEBUG INTERFAZ] AgenteInterfaz iniciado.");
         SwingUtilities.invokeLater(this::construirVentanaBarrera);
+        addBehaviour(new OneShotBehaviour(this) {
+            @Override
+            public void action() {
+                try { Thread.sleep(300); } catch (InterruptedException ignored) {}
+                actualizarBarrera("Leyendo matrícula...", "", "", Color.WHITE);
+                actualizarMensajePlaza("Esperando vehículo...");
+                actualizarTiempoPlaza(0);
+                System.out.println("[DEBUG INTERFAZ] Estado inicial mostrado.");
+            }
+        });
     }
     
     @SuppressWarnings("unused")
