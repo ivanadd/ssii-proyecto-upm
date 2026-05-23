@@ -3,6 +3,9 @@ package proyecto_ssii.agents;
 //Imports
 import jade.core.Agent;
 import jade.core.behaviours.OneShotBehaviour;
+import jade.core.behaviours.CyclicBehaviour;
+import jade.lang.acl.ACLMessage;
+import jade.lang.acl.MessageTemplate;
 import javax.swing.*;
 import java.awt.*;
 
@@ -41,6 +44,31 @@ public class AgenteInterfaz extends Agent {
                 System.out.println("[DEBUG INTERFAZ] Estado inicial mostrado.");
             }
         });
+        Agent agente = this;
+        addBehaviour(new CyclicBehaviour(agente) {
+            @Override
+            public void action() {
+                MessageTemplate mt = MessageTemplate.MatchPerformative(ACLMessage.INFORM);
+                ACLMessage msg = receive(mt);
+
+                if (msg != null) {
+                    String contenido = msg.getContent();
+                    System.out.println("[DEBUG INTERFAZ] Mensaje recibido → " + contenido);
+
+                    String[] partes = contenido.split(";");
+                    if (partes.length < 3) {
+                        System.out.println("[WARN INTERFAZ] Formato de mensaje incorrecto: " + contenido);
+                    } else {
+                        String accion = partes[0].trim();
+                        int plaza  = Integer.parseInt(partes[1].trim());
+                        int tiempo = Integer.parseInt(partes[2].trim());
+                    }
+                } else {
+                    block();
+                }
+            }
+        });
+        
     }
     
     @SuppressWarnings("unused")
