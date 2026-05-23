@@ -52,6 +52,12 @@ State was 2
 ```
 Este LLM ha sido el encargado de añadir un _try-catch_ que maneja la excepción que provocaba la muerte del agente.
 
+- `[23/05]`: Usado el LLM "ChatGPT" haciendo uso del modelo GPT-5.5. Este uso se justifica debido a que la primera implementación de la detección de contornos para la matrícula era incorrecta. 
+
+= COMPLETAR = COMPLETAR = COMPLETAR =
+
+- `[23/05]`: Usado el LLM "Gemini" para hacer una prueba del agente de procesamiento. Codigo que no es usado para la implementación final del agente. 
+
 ---
 ### Miembros del grupo
 - Arias de Dios, Iván
