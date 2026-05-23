@@ -19,6 +19,7 @@ Pensamos meter los usuarios con sus datos en una base de datos y conectarlo con 
 Para el agente de percepción, se ha hecho uso de las siguientes librerías y ficheros adicionales:
 - `opencv-4120.jar`: Encargado de la apertura de la cámara y gestión de la misma. Puede descargarse desde su [página web](https://opencv.org/releases/) oficial.
 - `tess4j-5.18.0.jar`: Encargado de la realización del OCR. Puede descargarse la última versión desde su [repositorio](https://github.com/nguyenq/tess4j/) de GitHub, en [_releases_](https://github.com/nguyenq/tess4j/releases).
+- `jna-5.x.jar`: Dependencia transitiva necesaria para `tess4j`. Si no está en el classpath, `AgenteLector` puede iniciar sin OCR, pero no realizará reconocimiento de texto.
 - `tesseract-ocr-w64-setup.exe`: Encargado de OCR también. Descargable .exe para _Windows_ desde [aquí](https://github.com/UB-Mannheim/tesseract/wiki).
 
 ## Instrucciones de ejecución
