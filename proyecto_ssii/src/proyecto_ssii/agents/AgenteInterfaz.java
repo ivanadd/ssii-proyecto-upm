@@ -86,6 +86,18 @@ public class AgenteInterfaz extends Agent {
         label.setForeground(color);
         return label;
     }
+    
+    //Actualiza la pantalla de la barrera
+    @SuppressWarnings("unused")
+	private void actualizarBarrera(String estado, String matricula, String plaza, Color colorEstado) {
+        SwingUtilities.invokeLater(() -> {
+            if (lblEstado == null) return;
+            lblEstado.setText(estado);
+            lblEstado.setForeground(colorEstado);
+            lblMatricula.setText(matricula);
+            lblPlaza.setText(plaza);
+        });
+    }
  
     
     
