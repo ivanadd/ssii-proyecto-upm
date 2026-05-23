@@ -85,6 +85,11 @@ public class AgenteInterfaz extends Agent {
                 }).start();
                 System.out.println("[DEBUG INTERFAZ] ACCESO_PERMITIDO → plaza " + plaza);
                 break;
+            case ACCESO_DENEGADO:
+                actualizarBarrera("Acceso denegado","No tiene ningún pedido para hoy", "",new Color(200, 40, 40));
+                resetearBarreraTrasEspera();
+                System.out.println("[DEBUG INTERFAZ] ACCESO_DENEGADO");
+                break;
             default:
                 System.out.println("[WARN INTERFAZ] Acción no procesada aún: " + accion);
                 break;
