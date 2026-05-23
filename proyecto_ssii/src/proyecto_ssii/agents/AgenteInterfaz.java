@@ -86,9 +86,14 @@ public class AgenteInterfaz extends Agent {
                 System.out.println("[DEBUG INTERFAZ] ACCESO_PERMITIDO → plaza " + plaza);
                 break;
             case ACCESO_DENEGADO:
-                actualizarBarrera("Acceso denegado","No tiene ningún pedido para hoy", "",new Color(200, 40, 40));
+                actualizarBarrera("Acceso denegado", "No tiene ningún pedido para hoy", "",new Color(200, 40, 40));
                 resetearBarreraTrasEspera();
                 System.out.println("[DEBUG INTERFAZ] ACCESO_DENEGADO");
+                break;
+            case PEDIDO_EN_PROCESO:
+                actualizarMensajePlaza("Pedido en proceso" + plaza);
+                //iniciarCuentaAtras(TIEMPO_ENTREGA); por implementar 
+                System.out.println("[DEBUG INTERFAZ] PEDIDO_EN_PROCESO → plaza " + plaza + " | tiempo: " + TIEMPO_ENTREGA + "s");
                 break;
             default:
                 System.out.println("[WARN INTERFAZ] Acción no procesada aún: " + accion);
@@ -110,7 +115,7 @@ public class AgenteInterfaz extends Agent {
         frameBarrera.getContentPane().setBackground(Color.BLACK);
         frameBarrera.setLayout(new GridLayout(3, 1, 0, 10));
  
-        lblEstado = crearLabel("Leyendo matrícula...", 26, Color.WHITE);
+        lblEstado = crearLabel("Leyendo matrícula", 26, Color.WHITE);
         lblMatricula = crearLabel("",20, Color.LIGHT_GRAY);
         lblPlaza = crearLabel("",20, Color.LIGHT_GRAY);
  
