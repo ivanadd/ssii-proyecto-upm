@@ -92,13 +92,26 @@ public class AgenteInterfaz extends Agent {
                 break;
             case PEDIDO_EN_PROCESO:
                 actualizarMensajePlaza("Pedido en proceso" + plaza);
-                //iniciarCuentaAtras(TIEMPO_ENTREGA); por implementar 
+                iniciarCuentaAtras(TIEMPO_ENTREGA);
                 System.out.println("[DEBUG INTERFAZ] PEDIDO_EN_PROCESO → plaza " + plaza + " | tiempo: " + TIEMPO_ENTREGA + "s");
                 break;
             default:
                 System.out.println("[WARN INTERFAZ] Acción no procesada aún: " + accion);
                 break;
         }
+    }
+    
+    private void iniciarCuentaAtras(int segundosTotales) {
+        new Thread(() -> {
+            for (int s = segundosTotales; s >= 0; s--) {
+                actualizarTiempoPlaza(s);
+                if (s == 0) break;
+                try { Thread.sleep(1000); } catch (InterruptedException ignored) { break; }
+            }
+            actualizarMensajePlaza("¡Pedido entregado!");
+            actualizarTiempoPlaza(0);
+            System.out.println("[DEBUG INTERFAZ] Cuenta atrás finalizada. Pedido entregado.");
+        }).start();
     }
     
     @SuppressWarnings("unused")
@@ -139,7 +152,7 @@ public class AgenteInterfaz extends Agent {
         framePlaza.getContentPane().setBackground(new Color(20, 20, 20));
         framePlaza.setLayout(new GridLayout(2, 1, 0, 8));
  
-        lblMensajePlaza = crearLabel("Esperando vehículo...", 18, Color.CYAN);
+        lblMensajePlaza = crearLabel("Esperando vehículo", 18, Color.CYAN);
         lblTiempo = crearLabel("", 22, Color.WHITE);
  
         framePlaza.add(lblMensajePlaza);
