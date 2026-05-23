@@ -191,7 +191,7 @@ public class AgenteLogica extends Agent {
     // Método auxiliar para enviar mensajes a la UI
     private void enviarMensajeUI(String accion, int plaza, int tiempoSegundos) {
         ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-        msg.addReceiver(new AID("AgenteVisualizacion", AID.ISLOCALNAME));
+        msg.addReceiver(new AID("AgenteInterfaz", AID.ISLOCALNAME));
         String contenidoFormateado = accion + ";" + plaza + ";" + tiempoSegundos;
         msg.setContent(contenidoFormateado);
         
