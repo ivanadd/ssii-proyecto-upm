@@ -98,7 +98,29 @@ public class AgenteInterfaz extends Agent {
             lblPlaza.setText(plaza);
         });
     }
+    //Actualiza el mensaje principal de la pantalla de la plaza 
+    @SuppressWarnings("unused")
+	private void actualizarMensajePlaza(String mensaje) {
+        SwingUtilities.invokeLater(() -> {
+            if (lblMensajePlaza == null) return;
+            lblMensajePlaza.setText(mensaje);
+        });
+    }
  
+    //Actualiza el contador de tiempo de la pantalla de la plaza
+    @SuppressWarnings("unused")
+	private void actualizarTiempoPlaza(int segundos) {
+        SwingUtilities.invokeLater(() -> {
+            if (lblTiempo == null) return;
+            if (segundos <= 0) {
+                lblTiempo.setText("");
+            } else {
+                int min = segundos / 60;
+                int seg = segundos % 60;
+                lblTiempo.setText(String.format("Tiempo restante: %02d:%02d", min, seg));
+            }
+        });
+    }
     
     
    
