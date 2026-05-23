@@ -133,7 +133,7 @@ public class AgenteLector extends Agent {
 //					}
 					
 					// mostrar camara
-					HighGui.imshow("[AGENTE LECTOR] Cámara en directo", frame);
+
 					if(bestMatr != null) {
 					    Imgproc.rectangle(
 					            frame,
@@ -154,8 +154,15 @@ public class AgenteLector extends Agent {
 					            2
 					    );
 					}
+					HighGui.imshow("[AGENTE LECTOR] Cámara en directo", frame);
 					HighGui.waitKey(1);
+					
+					grises.release();
+					blur.release();
+					bordes.release();
+					hier.release();
 				}
+				
 			}
 		};
 		addBehaviour(tickerBehaviour);
