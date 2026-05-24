@@ -17,6 +17,8 @@ import jade.domain.FIPAException;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 
+
+@SuppressWarnings("serial")
 public class AgenteLogica extends Agent {
 
     // Base de datos de prueba
@@ -147,6 +149,7 @@ public class AgenteLogica extends Agent {
             } else {
                 System.out.println("Hubo error al comprobar la matrícula"); 
                 enviarMensajeUI(AgenteInterfaz.ACCESO_DENEGADO, 0, 0);
+                matriculaActual = "";
                 result = 0;
             }
         }
@@ -182,7 +185,7 @@ public class AgenteLogica extends Agent {
             if (plazaAsignadaActual != -1) {
                 plazasParking[plazaAsignadaActual - 1] = false; 
                 System.out.println("Plaza " + plazaAsignadaActual + " liberada.");
-                enviarMensajeUI("PLAZA LIBERADA", plazaAsignadaActual, 0 );
+                enviarMensajeUI("PLAZA_LIBERADA", plazaAsignadaActual, 0 );
                 matriculaActual = "";
                 plazaAsignadaActual = -1;
             }
