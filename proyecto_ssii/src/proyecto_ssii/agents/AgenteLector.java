@@ -31,6 +31,7 @@ public class AgenteLector extends Agent {
 	private VideoCapture camara;
 	private Tesseract tesseract;
 	private boolean ocrDisponible;
+	private String ultimaMatriculaValida;
 	
 	private static final String PATH_TESSERACT = "C:\\Program Files\\Tesseract-OCR\\tessdata";
 	private static final String LANG = "eng";
@@ -171,17 +172,25 @@ public class AgenteLector extends Agent {
 							    	    2.0
 							    );
 							    
-							    // ocr 
+							    // ------------------------------------------------------------------
+							    // -------------- IMPORTANTE - OCR ----------------------------------
 							    BufferedImage plateImage = matToBufferedImage(grayPlate);
-							    String text = tesseract.doOCR(plateImage);
+							    String text = tesseract.doOCR(plateImage);			// text tiene la matricula
 
 							    text = text.replaceAll("\\s+", "").replaceAll("[^A-Z0-9]", "").trim();
 
-							    // System.out.println("OCR: " + text);
+							    if(text.matches("\\d{4}[BCDFGHJKLMNPRSTVWXYZ]{3}")) {
+							        ultimaMatriculaValida = text;
+							        System.out.println("[DEBUG OCR] OK " + ultimaMatriculaValida);
 
+							    } else System.out.println("[DEBUG OCR] FAIL " + text);
+							    
+							    // System.out.println("OCR: " + text);
+							    // ------------------------------------------------------------------
+							    
 							    Imgproc.putText(
 							            frame,
-							            text,
+							            ultimaMatriculaValida,
 							            new Point(bestMatr.x,
 							                    bestMatr.y - 10),
 							            Imgproc.FONT_HERSHEY_SIMPLEX,
