@@ -16,6 +16,10 @@ public class AgenteInterfaz extends Agent {
     public static final String ACCESO_PERMITIDO  = "ACCESO_PERMITIDO";
     public static final String ACCESO_DENEGADO   = "ACCESO_DENEGADO";
     public static final String PEDIDO_EN_PROCESO = "PEDIDO_EN_PROCESO";
+    public static final String PLAZA_LIBERADA    = "PLAZA_LIBERADA";
+
+    // Identifica la entrega en curso: si cambia, una cuenta atrás antigua deja de pintar
+    private volatile int generacionEntrega = 0;
     private JFrame frameBarrera;
     private JLabel lblEstado;
     private JLabel lblMatricula;
@@ -95,6 +99,18 @@ public class AgenteInterfaz extends Agent {
                 iniciarCuentaAtras(TIEMPO_ENTREGA);
                 System.out.println("[DEBUG INTERFAZ] PEDIDO_EN_PROCESO → plaza " + plaza + " | tiempo: " + TIEMPO_ENTREGA + "s");
                 break;
+            case PLAZA_LIBERADA:
+                generacionEntrega++; // invalida cualquier cuenta atrás en curso
+                actualizarMensajePlaza("¡Pedido entregado!");
+                actualizarTiempoPlaza(0);
+                System.out.println("[DEBUG INTERFAZ] PLAZA_LIBERADA → plaza " + plaza);
+                new Thread(() -> {
+                    try { Thread.sleep(TIEMPO_RESET_BARRERA * 1000L); } catch (InterruptedException ignored) {}
+                    actualizarMensajePlaza("Esperando vehículo...");
+                    actualizarTiempoPlaza(0);
+                    System.out.println("[DEBUG INTERFAZ] Pantalla de plaza reseteada.");
+                }).start();
+                break;
             default:
                 System.out.println("[WARN INTERFAZ] Acción no procesada aún: " + accion);
                 break;
@@ -102,15 +118,15 @@ public class AgenteInterfaz extends Agent {
     }
     
     private void iniciarCuentaAtras(int segundosTotales) {
+        final int gen = ++generacionEntrega; // esta es la única cuenta atrás válida
         new Thread(() -> {
             for (int s = segundosTotales; s >= 0; s--) {
+                if (gen != generacionEntrega) return; // llegó otra acción: abortamos
                 actualizarTiempoPlaza(s);
                 if (s == 0) break;
                 try { Thread.sleep(1000); } catch (InterruptedException ignored) { break; }
             }
-            actualizarMensajePlaza("¡Pedido entregado!");
-            actualizarTiempoPlaza(0);
-            System.out.println("[DEBUG INTERFAZ] Cuenta atrás finalizada. Pedido entregado.");
+            // El "Pedido entregado" y el reseteo los gestiona la acción PLAZA_LIBERADA
         }).start();
     }
     
