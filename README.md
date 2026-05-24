@@ -27,7 +27,20 @@ Para el agente de percepción, se ha hecho uso de las siguientes librerías y fi
 
 ## Instrucciones de ejecución
 
-= A COMPLETAR =
+Para ejecutar este proyecto, debe hacer uso del siguiente mandato en la raíz del proyecto (`/proyecto_ssii`):
+```text
+java -cp "bin;lib/*.jar" jade.Boot -gui AgenteLector:proyecto_ssii.agents.AgenteLector;AgenteLogica:proyecto_ssii.agents.AgenteLogica;AgenteInterfaz:proyecto_ssii.agents.AgenteInterfaz
+```
+
+O, en su defecto, y mucho más cómodo, lanzar el proyecto desde un IDE (por ejemplo, Eclipse), configurado de la siguiente manera:
+- Despliegue "Run" y acceda a "Run Configurations".
+- Añada un nuevo "Java Application" y renómbrelo con el identificador que prefiera.
+- En el campo "Main Class", escriba `jade.Boot`.
+- Acceda a la pestaña "Arguments" y escriba:
+```text
+-gui AgenteLector:proyecto_ssii.agents.AgenteLector;AgenteLogica:proyecto_ssii.agents.AgenteLogica;AgenteInterfaz:proyecto_ssii.agents.AgenteInterfaz
+```
+- Pinche en "Run" y arranque el proyecto con la configuración definida en estos pasos.
 
 ## Datos de ejemplo para la ejecución de la práctica
 
@@ -40,7 +53,7 @@ Para el agente de percepción, se ha hecho uso de las siguientes librerías y fi
 ## Declaración de uso de Inteligencia Artificial
 
 Agente de percepción:
-- `[22/05]`: Usado el LLM "GitHub Copilot" haciendo uso del modo "Auto", el cual ha seleccionado el modelo "GPT-5.4 mini". Se ha usado este LLM para corregir un error que obtenía por consola. Al arrancar JADE desde el agente de entrada (percepción), obtenía un error por pantalla, que indicaba que el agente había muerto sin haber sido terminado correctamente: 
+- `[22/05]`: Usado el LLM "GitHub Copilot" haciendo uso del modo "Auto", el cual ha seleccionado el modelo "GPT-5.4 mini". Se ha usado este LLM para corregir un error que obtenía por consola. Al arrancar JADE desde el agente de entrada (percepción), obtenía un error por pantalla, que indicaba que el agente había muerto sin haber sido terminado correctamente. Este LLM ha sido el encargado de añadir un _try-catch_ que maneja la excepción que provocaba la muerte del agente.
 
 ```text
 ***  Uncaught Exception for agent AgenteLector  ***
@@ -55,13 +68,14 @@ ERROR: Agent AgenteLector died without being properly terminated !!!
 State was 2
 [DEBUG LECTOR] Agente lector finalizado.
 ```
-Este LLM ha sido el encargado de añadir un _try-catch_ que maneja la excepción que provocaba la muerte del agente.
 
-- `[23/05]`: Usado el LLM "ChatGPT" haciendo uso del modelo GPT-5.5. Este uso se justifica debido a que la primera implementación de la detección de contornos para la matrícula era incorrecta. 
+- `[23/05]`: Usado el LLM "ChatGPT" haciendo uso del modelo GPT-5.5. Este uso se justifica debido a que la primera implementación de la detección de contornos para la matrícula era incorrecta. Durante los testeos de la primera implementación, nos dimos cuenta de que el agente detectaba objetos normales y pequeñas secciones de la cámara como esquinas o muebles. Una vez ajustados los parámetros, en el programa recortamos manualmente la imagen para que solo detecte una matrícula y no varias sobre el mismo objeto (algo que hicimos sin LLM). El LLM solo fue usado para corregir lecturas falsas.
+Aquí puedes ver la [lectura con error](https://github.com/ivanadd/ssii-proyecto-upm/blob/main/img/img_ag_lect/lect_con_error1.png), otra [lectura con error](https://github.com/ivanadd/ssii-proyecto-upm/blob/main/img/img_ag_lect/lect_con_error2.png) tras ajustar algún parámetro y la [lectura correcta](https://github.com/ivanadd/ssii-proyecto-upm/blob/main/img/img_ag_lect/lect_correcta.png) tras aplicar el recorte y modificar parámetros de nuevo. Atendiendo a las imágenes, podemos apreciar que aparece el texto fijo "Matrícula", puesto que cuando estuvimos solucionando estos errores, aún no habíamos terminado de implementar el reconocimiento OCR.
 
-= COMPLETAR = COMPLETAR = COMPLETAR =
-
+Agente de Cálculo y Lógica del programa:
 - `[23/05]`: Usado el LLM "Gemini" para hacer una prueba del agente de procesamiento. Codigo que no es usado para la implementación final del agente. 
+
+Agente de Interfaz:
 
 ---
 ### Miembros del grupo
