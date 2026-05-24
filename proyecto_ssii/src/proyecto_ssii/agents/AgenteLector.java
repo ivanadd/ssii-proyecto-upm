@@ -31,7 +31,7 @@ public class AgenteLector extends Agent {
 	private VideoCapture camara;
 	private Tesseract tesseract;
 	private boolean ocrDisponible;
-	private String ultimaMatriculaValida;
+	private String ultimaMatriculaValida = "";
 	
 	private static final String PATH_TESSERACT = "C:\\Program Files\\Tesseract-OCR\\tessdata";
 	private static final String LANG = "eng";
