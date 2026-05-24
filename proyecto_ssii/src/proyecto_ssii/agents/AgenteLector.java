@@ -175,7 +175,7 @@ public class AgenteLector extends Agent {
 							    BufferedImage plateImage = matToBufferedImage(grayPlate);
 							    String text = tesseract.doOCR(plateImage);
 
-							    text = text.replaceAll("[^A-Z0-9 ]", "").trim();
+							    text = text.replaceAll("\\s+", "").replaceAll("[^A-Z0-9]", "").trim();
 
 							    // System.out.println("OCR: " + text);
 
