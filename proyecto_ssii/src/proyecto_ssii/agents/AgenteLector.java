@@ -33,6 +33,7 @@ public class AgenteLector extends Agent {
 	private Tesseract tesseract;
 	private boolean ocrDisponible;
 	private String ultimaMatriculaValida = "";
+	private String ultimaMatriculaEnviada = "";
 	
 	// ¡CUIDADO! SOLO PARA SO. WINDOWS.
 	private static final String PATH_TESSERACT = "C:\\Program Files\\Tesseract-OCR\\tessdata";
@@ -176,15 +177,28 @@ public class AgenteLector extends Agent {
 							    // -------------- IMPORTANTE - OCR ----------------------------------
 							    BufferedImage plateImage = matToBufferedImage(grayPlate);
 							    String text = tesseract.doOCR(plateImage);			// text tiene la matricula
-
+							    ACLMessage mensaje = new ACLMessage(ACLMessage.INFORM);
+							    
 							    text = text.replaceAll("\\s+", "").replaceAll("[^A-Z0-9]", "").trim();
 
 							    if(text.matches("\\d{4}[BCDFGHJKLMNPRSTVWXYZ]{3}")) {
 							        ultimaMatriculaValida = text;
 							        System.out.println("[DEBUG OCR] OK " + ultimaMatriculaValida);
+							        
+							        if(!ultimaMatriculaValida.equals(ultimaMatriculaEnviada)) {
+							        	ultimaMatriculaEnviada = ultimaMatriculaValida;
+							        	
+							        	// envia mensaje a otro agente
+							        	mensaje.addReceiver(new AID("AgenteLogica",AID.ISLOCALNAME));
+							        	mensaje.setContent(ultimaMatriculaValida);
+							        	send(mensaje);
+							        	System.out.println("[DEBUG ACL]: Mensaje enviado: " + ultimaMatriculaValida);
+							        }
+							        
 							    } else System.out.println("[DEBUG OCR] FAIL " + text);
 							    
 							    // System.out.println("[DEBUG OCR] TEXTO LEIDO: " + text);  // solo para debug
+							    // ------------------------------------------------------------------
 							    // ------------------------------------------------------------------
 							    
 							    Imgproc.putText(
