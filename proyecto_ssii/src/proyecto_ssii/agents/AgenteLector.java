@@ -24,6 +24,7 @@ import net.sourceforge.tess4j.TesseractException;
 import jade.core.Agent;
 import jade.core.behaviours.*;
 import jade.lang.acl.*;
+import jade.core.AID;
 
 @SuppressWarnings({ "unused", "serial" })
 public class AgenteLector extends Agent {
@@ -33,6 +34,7 @@ public class AgenteLector extends Agent {
 	private boolean ocrDisponible;
 	private String ultimaMatriculaValida = "";
 	
+	// ¡CUIDADO! SOLO PARA SO. WINDOWS.
 	private static final String PATH_TESSERACT = "C:\\Program Files\\Tesseract-OCR\\tessdata";
 	private static final String LANG = "eng";
 	
@@ -56,7 +58,7 @@ public class AgenteLector extends Agent {
 			return;
 		}
 		
-		// inicializacion
+		// inicializacion del proyecto 
 		try {
 			this.tesseract = new Tesseract();
 			this.tesseract.setDatapath(PATH_TESSERACT);
@@ -67,7 +69,7 @@ public class AgenteLector extends Agent {
 		} catch (NoClassDefFoundError | UnsatisfiedLinkError error) {
 			this.tesseract = null;
 			this.ocrDisponible = false;
-			System.out.println("[ERROR LECTOR] OCR deshabilitado: falta una dependencia nativa o de clase (JNA/Tesseract). "
+			System.out.println("[ERROR LECTOR] OCR deshabilitado: falta una dependencia (JNA/Tesseract). "
 					+ error.getMessage());
 		}
 		
@@ -138,7 +140,6 @@ public class AgenteLector extends Agent {
 						if (ocrDisponible && tesseract != null) {
 							try {
 								int recorteIzquierda = (int)(bestMatr.width * 0.15);
-
 								Rect roiRect = new Rect(
 								        bestMatr.x + recorteIzquierda,
 								        bestMatr.y,
@@ -147,7 +148,6 @@ public class AgenteLector extends Agent {
 								);
 
 								Mat plateROI = new Mat(frame, roiRect);
-								
 							    Mat grayPlate = new Mat();
 							    
 							    Imgproc.cvtColor(
@@ -182,10 +182,9 @@ public class AgenteLector extends Agent {
 							    if(text.matches("\\d{4}[BCDFGHJKLMNPRSTVWXYZ]{3}")) {
 							        ultimaMatriculaValida = text;
 							        System.out.println("[DEBUG OCR] OK " + ultimaMatriculaValida);
-
 							    } else System.out.println("[DEBUG OCR] FAIL " + text);
 							    
-							    // System.out.println("OCR: " + text);
+							    // System.out.println("[DEBUG OCR] TEXTO LEIDO: " + text);  // solo para debug
 							    // ------------------------------------------------------------------
 							    
 							    Imgproc.putText(
