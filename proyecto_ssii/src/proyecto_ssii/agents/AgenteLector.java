@@ -177,7 +177,7 @@ public class AgenteLector extends Agent {
 							    // -------------- IMPORTANTE - OCR ----------------------------------
 							    BufferedImage plateImage = matToBufferedImage(grayPlate);
 							    String text = tesseract.doOCR(plateImage);			// text tiene la matricula
-							    ACLMessage mensaje = new ACLMessage(ACLMessage.INFORM);
+							    ACLMessage mensaje = new ACLMessage(ACLMessage.REQUEST);
 							    
 							    text = text.replaceAll("\\s+", "").replaceAll("[^A-Z0-9]", "").trim();
 
