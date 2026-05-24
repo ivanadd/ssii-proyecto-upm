@@ -20,7 +20,10 @@ Para el agente de percepción, se ha hecho uso de las siguientes librerías y fi
 - `opencv-4120.jar`: Encargado de la apertura de la cámara y gestión de la misma. Puede descargarse desde su [página web](https://opencv.org/releases/) oficial.
 - `tess4j-5.18.0.jar`: Encargado de la realización del OCR. Puede descargarse la última versión desde su [repositorio](https://github.com/nguyenq/tess4j/) de GitHub, en [_releases_](https://github.com/nguyenq/tess4j/releases).
 - `jna-5.x.jar`: Dependencia transitiva necesaria para `tess4j`. Si no está en el classpath, `AgenteLector` puede iniciar sin OCR, pero no realizará reconocimiento de texto.
-- `tesseract-ocr-w64-setup.exe`: Encargado de OCR también. Descargable .exe para _Windows_ desde [aquí](https://github.com/UB-Mannheim/tesseract/wiki).
+- `commons-codec-1.3.jar` y `commons-io-2.22.0.jar`: Dependencia necesaria para `tess4j`.
+- `jar-imageio-core-1.4.0.jar`: Dependencia de `tess4j`.
+- `jbig2-imageio-3.0.4.jar` y `lept4j-1.23.0.jar`: Dependencias de `tess4j`.
+- `tesseract-ocr-w64-setup.exe`: Encargado de OCR también. Descargable .exe para _Windows_ desde [aquí](https://github.com/UB-Mannheim/tesseract/wiki). Debe ser instalado en la ruta `C:\Program Files\Tesseract-OCR\` para su correcto funcionamiento con el sistema multiagentes. 
 
 ## Instrucciones de ejecución
 
