@@ -43,7 +43,7 @@ O, en su defecto, y mucho más cómodo, lanzar el proyecto desde un IDE (por eje
 - Pinche en "Run" y arranque el proyecto con la configuración definida en estos pasos.
 
 ## Datos de ejemplo para la ejecución de la práctica
-Tras arrancar el programa siguiendo las indicaciones previamente explicadas, verá que se abre una ventana con una cámara en directo. Muestre una matrícula impresa o real ante la cámara. El programa se encargará de buscar la forma de la matrícula y, si corresponde, realizará un OCR del texto de la matrícula. Si la matrícula está registrada en el sistema, dará por válido el acceso y le redirigirá a una plaza concreta. Si su matrícula no está añadida al sistema, rechazará la entrada del vehículo al conjunto de plazas. Puede ver una lectura correcta en [esta]() imagen. (ATENCIOn !!! AÑADIR IMAGEN) La matricula probada en el ejemplo y que se encuentra registrada en el sistema es la "1234FPM".
+Tras arrancar el programa siguiendo las indicaciones previamente explicadas, verá que se abre una ventana con una cámara en directo. Muestre una matrícula impresa o real ante la cámara. El programa se encargará de buscar la forma de la matrícula y, si corresponde, realizará un OCR del texto de la matrícula. Si la matrícula está registrada en el sistema, dará por válido el acceso y le redirigirá a una plaza concreta. Si su matrícula no está añadida al sistema, rechazará la entrada del vehículo al conjunto de plazas. Puede ver una ejecución correcta en [esta](https://github.com/ivanadd/ssii-proyecto-upm/blob/main/img/img_ag_completo/ejecucion_correcta_jade.png) imagen. (ATENCIOn !!! AÑADIR IMAGEN) La matricula probada en el ejemplo y que se encuentra registrada en el sistema es la "1234FPM".
 
 ## Diagrama de la arquitectura del sistema
 
