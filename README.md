@@ -48,11 +48,13 @@ Tras arrancar el programa siguiendo las indicaciones previamente explicadas, ver
 ## Diagrama de la arquitectura del sistema
 
 ```mermaid
+%%{init: {'theme':'dark'}}%%
+
 graph TD
     %% Estilos
-    classDef main fill:#f0f4f8,stroke:#102a43,stroke-width:2px;
-    classDef folder fill:#e1f5fe,stroke:#0277bd,stroke-width:1px;
-    classDef file fill:#fff,stroke:#455a64,stroke-width:1px,stroke-dasharray: 3 3;
+    classDef main fill:#1e1e2f,stroke:#58a6ff,stroke-width:3px,color:#ffffff;
+    classDef folder fill:#0d47a1,stroke:#64b5f6,stroke-width:2px,color:#ffffff;
+    classDef file fill:#263238,stroke:#90caf9,stroke-width:1px,color:#ffffff,stroke-dasharray: 5 5;
 
     subgraph root [proyecto_ssii]
         bin[bin]:::folder
@@ -64,29 +66,26 @@ graph TD
             model[model]:::folder
             testeo[testeo]:::folder
             
-            %% Archivos especÃ­ficos
             AI[AgenteInterfaz.java]:::file
-            AL[AgenteLogica]:::file
-            AR[AgenteLector]:::file
+            AL[AgenteLogica.java]:::file
+            AR[AgenteLector.java]:::file
             U[Usuario.java]:::file
-            TO[TestOpenCV]:::file
+            TO[TestOpenCV.java]:::file
         end
     end
 
-    %% Relaciones de carpetas
-    bin --> src
+    %% Relaciones
     src --> agents
     src --> model
     src --> testeo
 
-    %% Relaciones de archivos
     agents --> AI
-    agents --> ALog
-    agents --> ALec
+    agents --> AL
+    agents --> AR
     model --> U
     testeo --> TO
 
-    %% Aplicar estilos
+    %% Clase principal
     class root main;
 ```
 
