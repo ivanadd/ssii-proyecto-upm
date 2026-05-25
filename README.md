@@ -48,45 +48,38 @@ Tras arrancar el programa siguiendo las indicaciones previamente explicadas, ver
 ## Diagrama de la arquitectura del sistema
 
 ```mermaid
-%%{init: {'theme':'dark'}}%%
-
 graph TD
-    %% Estilos
-    classDef main fill:#1e1e2f,stroke:#58a6ff,stroke-width:3px,color:#ffffff;
-    classDef folder fill:#0d47a1,stroke:#64b5f6,stroke-width:2px,color:#ffffff;
-    classDef file fill:#263238,stroke:#90caf9,stroke-width:1px,color:#ffffff,stroke-dasharray: 5 5;
+    %% Definición de estilos para los nodos
+    classDef folder fill:#f0f0f0,stroke:#333,stroke-width:1px;
+    classDef file fill:#fff,stroke:#666,stroke-width:1px;
 
-    subgraph root [proyecto_ssii]
-        bin[bin]:::folder
-        lib[lib]:::folder
-        src[src]:::folder
-        
-        subgraph src_content [src / proyecto_ssii]
-            agents[agents]:::folder
-            model[model]:::folder
-            testeo[testeo]:::folder
-            
-            AI[AgenteInterfaz.java]:::file
-            AL[AgenteLogica.java]:::file
-            AR[AgenteLector.java]:::file
-            U[Usuario.java]:::file
-            TO[TestOpenCV.java]:::file
-        end
-    end
+    %% Nodos principales (Carpetas)
+    bin[bin]:::folder
+    lib[lib]:::folder
+    src[src]:::folder
+    agents[agents]:::folder
+    model[model]:::folder
+    testeo[testeo]:::folder
 
-    %% Relaciones
+    %% Nodos específicos (Archivos)
+    AI[AgenteInterfaz.java]:::file
+    AL[AgenteLogica]:::file
+    AR[AgenteLector]:::file
+    U[Usuario.java]:::file
+    TO[TestOpenCV]:::file
+
+    %% Relaciones de jerarquía
+    bin --> src
     src --> agents
     src --> model
     src --> testeo
 
+    %% Relaciones de archivos
     agents --> AI
-    agents --> AL
-    agents --> AR
+    agents --> ALog
+    agents --> ALec
     model --> U
     testeo --> TO
-
-    %% Clase principal
-    class root main;
 ```
 
 ## Declaración de uso de Inteligencia Artificial
