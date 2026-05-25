@@ -65,8 +65,8 @@ graph TD
 
     %% Nodos específicos (Archivos)
     AI[AgenteInterfaz.java]:::file
-    AL[AgenteLogica]:::file
-    AR[AgenteLector]:::file
+    AL[AgenteLogica.java]:::file
+    AR[AgenteLector.java]:::file
     U[Usuario.java]:::file
     TO[TestOpenCV]:::file
 
@@ -78,8 +78,8 @@ graph TD
 
     %% Relaciones de archivos
     agents --> AI
-    agents --> ALog
-    agents --> ALec
+    agents --> AL
+    agents --> AR
     model --> U
     testeo --> TO
 ```
