@@ -48,10 +48,12 @@ Tras arrancar el programa siguiendo las indicaciones previamente explicadas, ver
 ## Diagrama de la arquitectura del sistema
 
 ```mermaid
+%%{init: {'theme':'dark'}}%%
+
 graph TD
     %% Definición de estilos para los nodos
-    classDef folder fill:#f0f0f0,stroke:#333,stroke-width:1px;
-    classDef file fill:#fff,stroke:#666,stroke-width:1px;
+    classDef folder fill:#0d47a1,stroke:#64b5f6,stroke-width:1px,color:#ffffff;
+    classDef file fill:#263238,stroke:#90caf9,stroke-width:1px,color:#ffffff;
 
     %% Nodos principales (Carpetas)
     bin[bin]:::folder
