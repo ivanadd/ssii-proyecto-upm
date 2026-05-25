@@ -6,13 +6,13 @@ Repositorio colaborativo para la práctica de "Multiagentes" de la asignatura "S
 Este sistema se encarga de automatizar, mediante un sistema multiagente, las compras realizadas mediante _Click and Collect_ y derivados.
 
 Este sistema tratará de modelizar un sistema de automatización para un entorno de tipo _Click and Collect_, en el que el usuario, con su coche, se acerca al _párking_ del establecimiento y le cargan la compra en su coche con un pedido previamente asociado a su matrícula. 
-La diferencia de nuestra práctica con lo que ya existe es que, con ella, se pretende una mejor en la eficiencia de estos métodos de compra. La idea es separar una zona del _párking_ ya existente y destinarla únicamente a _Click and Collect_. Para acceder a este subconjunto de plazas, será necesario pasar por una barrera que detecte, mediante una cámara, la matrícula del coche que está esperando frente a ella. Este sistema detectará si el usuario tiene un pedido pendiente para ese día. Si lo tiene, le dejará pasar y le asignará una plaza, mostrando toda esta información mediante una pantalla colocada al lado de la barrera. El sistema también tendrá guardado qué plazas están ocupadas dentro del subconjunto de plazas destinadas a _Click and Collect_. Al asignar una plaza, damos por supuesto que una plaza está ocupada, y al liberar el pedido, damos por supuesto que esa plaza está liberada. En la propia plaza del _párking_ se situará una pantalla en la que se mostrará un tiempo restante aproximado para la entrega del pedido (TEMPORA, ESTÁ POR VER).
+La diferencia de nuestra práctica con lo que ya existe es que, con ella, se pretende una mejor en la eficiencia de estos métodos de compra. La idea es separar una zona del _párking_ ya existente y destinarla únicamente a _Click and Collect_. Para acceder a este subconjunto de plazas, será necesario pasar por una barrera que detecte, mediante una cámara, la matrícula del coche que está esperando frente a ella. Este sistema detectará si el usuario tiene un pedido pendiente para ese día. Si lo tiene, le dejará pasar y le asignará una plaza, mostrando toda esta información mediante una pantalla colocada al lado de la barrera. El sistema también tendrá guardado qué plazas están ocupadas dentro del subconjunto de plazas destinadas a _Click and Collect_. Al asignar una plaza, damos por supuesto que una plaza está ocupada, y al liberar el pedido, damos por supuesto que esa plaza está liberada. En la propia plaza del _párking_ se situará una pantalla en la que se mostrará un tiempo restante aproximado para la entrega del pedido.
 
-Pensamos meter los usuarios con sus datos en una base de datos y conectarlo con el proyecto, pero por simplicidad para nuestra práctica y siguiendo las indicaciones del profesor, hemos decidido almacenar los usuarios en estructuras de datos de Java. (TEMPORAL, ESTÁ POR VER QUÉ ESTRUCTURA CONCRETA!) 
+Pensamos meter los usuarios con sus datos en una base de datos y conectarlo con el proyecto, pero por simplicidad para nuestra práctica y siguiendo las indicaciones del profesor, hemos decidido almacenar los usuarios en estructuras de datos de Java. 
 
 ## Instrucciones de instalación
-
-= A COMPLETAR =
+Clone este repositorio en la ruta deseada y siga las instrucciones de ejecución indicadas posteriormente. Recuerde que debe tener instalado Java 8 y un JDK igual o superior a la versión 21.0.
+Es necesaria la instalación del programa `tesseract-ocr-w64-setup.exe`, en la ruta `C:\Program Files\Tesseract-OCR\`. Puede encontrar el descargable `.exe` en [este](https://github.com/UB-Mannheim/tesseract/wiki) enlace.
 
 ## Dependencias necesarias para la instalación
 
@@ -43,8 +43,7 @@ O, en su defecto, y mucho más cómodo, lanzar el proyecto desde un IDE (por eje
 - Pinche en "Run" y arranque el proyecto con la configuración definida en estos pasos.
 
 ## Datos de ejemplo para la ejecución de la práctica
-
-= A COMPLETAR =
+Tras arrancar el programa siguiendo las indicaciones previamente explicadas, verá que se abre una ventana con una cámara en directo. Muestre una matrícula impresa o real ante la cámara. El programa se encargará de buscar la forma de la matrícula y, si corresponde, realizará un OCR del texto de la matrícula. Si la matrícula está registrada en el sistema, dará por válido el acceso y le redirigirá a una plaza concreta. Si su matrícula no está añadida al sistema, rechazará la entrada del vehículo al conjunto de plazas. Puede ver una lectura correcta en [esta]() imagen. (ATENCIOn !!! AÑADIR IMAGEN) La matricula probada en el ejemplo y que se encuentra registrada en el sistema es la "1234FPM".
 
 ## Diagrama de la arquitectura del sistema
 
@@ -75,8 +74,6 @@ Aquí puedes ver la [lectura con error](https://github.com/ivanadd/ssii-proyecto
 Agente de Cálculo y Lógica del programa:
 - `[23/05]`: Usado el LLM "Gemini" para hacer una prueba del agente de procesamiento. Codigo que no es usado para la implementación final del agente. 
 
-Agente de Interfaz:
-
 ---
 ### Miembros del grupo
 - Arias de Dios, Iván
@@ -85,4 +82,5 @@ Agente de Interfaz:
 - Juaranz Domínguez, André
 - Lahoz Vives, Hugo
 
+Grupo 34.
 (Universidad Politécnica de Madrid - Escuela Técnica Superior de Ingenieros Informáticos - 25/26)
